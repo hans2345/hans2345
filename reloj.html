@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reloj Rápido</title>
+  <style>
+    /* Estilos básicos */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #333;
+    }
+
+    /* Contenedor del reloj */
+    .clock {
+      width: 200px;
+      height: 200px;
+      border: 8px solid #fff;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    /* Centro del reloj */
+    .center {
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Manecillas */
+    .hand {
+      width: 50%;
+      height: 4px;
+      background-color: #fff;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transform: rotate(0deg);
+      transition: transform 0.1s linear;
+    }
+
+    .second-hand {
+      height: 2px;
+      background-color: red;
+    }
+
+    .minute-hand {
+      height: 3px;
+    }
+
+    .hour-hand {
+      height: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="center"></div>
+    <div class="hand hour-hand"></div>
+    <div class="hand minute-hand"></div>
+    <div class="hand second-hand"></div>
+  </div>
+
+  <script>
+    // Seleccionamos las manecillas
+    const secondHand = document.querySelector('.second-hand');
+    const minuteHand = document.querySelector('.minute-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    // Función para actualizar el movimiento rápido de las manecillas
+    function updateClock() {
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+
+      // Ajuste rápido: incrementar los ángulos más rápido
+      const secondDegrees = ((seconds * 6) + 360) * 10;
+      const minuteDegrees = ((minutes * 6) + 360) * 10;
+      const hourDegrees = ((hours * 30) + 360) * 10;
+
+      secondHand.style.transform = rotate(${secondDegrees}deg);
+      minuteHand.style.transform = rotate(${minuteDegrees}deg);
+      hourHand.style.transform = rotate(${hourDegrees}deg);
+    }
+
+    // Intervalo de actualización
+    setInterval(updateClock, 100);
+  </script>
+</body>
+</html>
